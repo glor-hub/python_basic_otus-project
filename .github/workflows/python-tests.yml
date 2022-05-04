@@ -1,0 +1,33 @@
+name: Pylint
+
+on: [push]
+
+jobs:
+  lint-tests-and-tests-coverage:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements-dev.txt
+    - name: Analysing the code with pylint
+      run: |
+        pylint $(git ls-files '*.py')
+    - name: Run python tests
+      run: |
+        cd horseshop
+        python manage.py test
+    - name: Analysing the test сoverage using codecov
+      run: |
+        cd horseshop
+        coverage run --source='.' manage.py test
+        coverage report
