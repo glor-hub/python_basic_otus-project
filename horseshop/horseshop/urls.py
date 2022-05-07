@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-import product.views as product
+
 from horseshop.settings import DEBUG
+from horseshop import views
 
 urlpatterns = [
-    path('', product.index, name='home'),
+    path('', views.index, name='home'),
     path('product/', include('product.urls', namespace='product')),
     path('shopauth/', include('shopauth.urls', namespace='shopauth')),
     path('admin/', admin.site.urls),
