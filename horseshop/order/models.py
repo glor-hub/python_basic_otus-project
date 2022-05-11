@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 # Create your models here.
 
@@ -27,6 +28,9 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_created=True, auto_now_add=False)
     status = models.CharField(max_length=1, choices=STATUS, default='C')
     comment = models.TextField(blank=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2,
+                                      default=0)  # total price for all products in order
+    total_count = models.IntegerField(default=0)  # total count of products in order
 
     def __str__(self):
         return f"order {self.pk} status {self.status}"
