@@ -43,9 +43,9 @@ class ProductProperty(models.Model):
              (44, '44'),
              (46, '46')
              ]
-    manufactured = models.IntegerField(default=0)
+    manufactured = models.PositiveIntegerField(default=0)
     color = models.CharField(max_length=2, choices=COLORS, default='BK')
-    size = models.IntegerField(choices=SIZES, default=38)
+    size = models.PositiveIntegerField(choices=SIZES, default=38)
     gender = models.CharField(max_length=1, choices=GENDER, default='M')
 
     def __str__(self):
@@ -55,10 +55,10 @@ class ProductProperty(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=64)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, null=True)
-    curr_price = models.DecimalField(max_digits=10, decimal_places=2)
-    curr_count = models.IntegerField()
+    curr_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    curr_count = models.PositiveIntegerField(default=1)
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, null=True)
-    property = models.OneToOneField('product.ProductProperty', on_delete=models.CASCADE, null=True)
+    property = models.ForeignKey(ProductProperty, on_delete=models.CASCADE, null=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -68,9 +68,16 @@ class Product(models.Model):
 class ProductInOrder(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    count = models.IntegerField()
+    price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    count = models.IntegerField(default=1)
     description = models.TextField(blank=True)
 
+    def save(self, *args, **kwargs):
+        price_per_item = self.product.curr_price
+        self.price_per_item = price_per_item
+        self.total_price = self.count * self.price_per_item
+        super(ProductInOrder, self).save(*args, **kwargs)
+
     def __str__(self):
-        return f"product{self.product.name} in order{self.order.primary_key}"
+        return f"product {self.product.name} in order {self.order.pk}"
