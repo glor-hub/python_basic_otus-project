@@ -77,7 +77,7 @@ class ProductInOrder(models.Model):
         price_per_item = self.product.curr_price
         self.price_per_item = price_per_item
         self.total_price = self.count * self.price_per_item
-        super(ProductInOrder, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"product {self.product.name} in order {self.order.pk}"
