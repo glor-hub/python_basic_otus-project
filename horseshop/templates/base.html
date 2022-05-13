@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css"
+          integrity="sha384-/frq1SRXYH/bSyou/HUp/hib7RVN1TawQYja658FEOodR/FQBKVqT9Ol+Oz3Olq5" crossorigin="anonymous">
+
     <title>
         {% block title %}
         {% endblock %}
@@ -14,67 +15,79 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg" class="navbar navbar-dark" style="background-image: linear-gradient(-45deg, #6b59b9,#a3a0a8);">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Magic Horse</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#">Catalog</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#">News</a>
-        </li>
-      </ul>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#">Catalog</a>
-        </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#">News</a>
-        </li>
-      </ul>
+<nav class="navbar navbar-expand-lg" class="navbar navbar-dark"
+     style="background-image: linear-gradient(-45deg, #6b59b9,#a3a0a8);">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Magic Horse</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Catalog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">News</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><i
+                            class="fa-regular fa-user"></i></a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Login</a></li>
+                        <li><a class="dropdown-item" href="#">Register</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i
+                            class="fa-solid fa-cart-shopping"></i></a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
-{#<nav class="navbar navbar-dark" style="background-image: linear-gradient(-45deg, #135475, #299e76);">#}
-{#<nav class="navbar navbar-dark" style="background-image: linear-gradient(-45deg, #3F5EFB,#DC466B);">#}
-{##}
-{#    <div class="container-fluid">#}
-{#        <a class="navbar-brand" href="#">  Magic horse</a>#}
-{#    </div>#}
-{#</nav>#}
+{#
+<nav class="navbar navbar-dark" style="background-image: linear-gradient(-45deg, #135475, #299e76);">#}
+    {#
+    <nav class="navbar navbar-dark" style="background-image: linear-gradient(-45deg, #3F5EFB,#DC466B);">#}
+        {##}
+        {#
+        <div class="container-fluid">#}
+            {# <a class="navbar-brand" href="#"> Magic horse</a>#}
+            {#
+        </div>
+        #}
+        {#
+    </nav>
+    #}
 
-{% block main_content %}
+    {% block main_content %}
 
-{% endblock %}
+    {% endblock %}
 
-{% block menu %}
+    {% block menu %}
     <ul>
         <li><a href="{% url 'shopauth:register' %}">user registration</a></li>
         <li>
             {% if user.is_anonymous %}
-                <a href="{% url 'shopauth:login' %}">login</a>
+            <a href="{% url 'shopauth:login' %}">login</a>
             {% else %}
-                <a href="{% url 'shopauth:logout' %}">logout</a>
-                <br>
-                <br>
-{% block product_list %}
-                <a href="{% url 'product:list' %}">to products list </a>
- {% endblock %}
+            <a href="{% url 'shopauth:logout' %}">logout</a>
+            <br>
+            <br>
+            {% block product_list %}
+            <a href="{% url 'product:list' %}">to products list </a>
+            {% endblock %}
             {% endif %}
         </li>
     </ul>
-{% endblock %}
+    {% endblock %}
 
 </body>
 </html>
