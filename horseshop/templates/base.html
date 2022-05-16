@@ -66,7 +66,7 @@
                                 <tr>
                                     <th scope="row">1</th>
                                     <td><img src="{% static 'img/product/img1.png' %}"></td>
-                                <td><a href="#"</a> Шлем</td>
+                                    <td><a href="#"</a> Шлем</td>
                                     <td>234.99</td>
                                     <td>3</td>
                                 </tr>
@@ -93,23 +93,23 @@
 
 {% endblock %}
 
-{% block menu %}
-    <ul>
-        <li><a href="{% url 'shopauth:register' %}">user registration</a></li>
-        <li>
-            {% if user.is_anonymous %}
-                <a href="{% url 'shopauth:login' %}">login</a>
-            {% else %}
-                <a href="{% url 'shopauth:logout' %}">logout</a>
-                <br>
-                <br>
-                {% block product_list %}
-                    <a href="{% url 'product:list' %}">to products list </a>
-                {% endblock %}
-            {% endif %}
-        </li>
-    </ul>
-{% endblock %}
+{#{% block menu %}#}
+{#    <ul>#}
+{#        <li><a href="{% url 'shopauth:register' %}">user registration</a></li>#}
+{#        <li>#}
+{#            {% if user.is_anonymous %}#}
+{#                <a href="{% url 'shopauth:login' %}">login</a>#}
+{#            {% else %}#}
+{#                <a href="{% url 'shopauth:logout' %}">logout</a>#}
+{#                <br>#}
+{#                <br>#}
+{#                {% block product_list %}#}
+{#                    <a href="{% url 'product:list' %}">to products list </a>#}
+{#                {% endblock %}#}
+{#            {% endif %}#}
+{#        </li>#}
+{#    </ul>#}
+{#{% endblock %}#}
 
 </body>
 </html>

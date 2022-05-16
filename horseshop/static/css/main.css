@@ -11,11 +11,6 @@ body {
     min-width: 320px;
 }
 
-img {
-    /*max-width: 100%;*/
-    height: auto;
-}
-
 section {
     padding: 50px 0;
 }
@@ -63,3 +58,19 @@ a:hover {
     max-width: 100px;
 }
 /* Header */
+
+/* Carousel */
+.my-carousel {
+	padding: 0;
+}
+
+.my-carousel .carousel-item {
+	/*max-height: 500px;*/
+    display: flex;
+
+}
+
+.my-carousel .carousel-item img {
+	object-fit: cover;
+}
+/* Carousel */

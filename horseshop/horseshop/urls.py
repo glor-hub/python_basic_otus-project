@@ -20,7 +20,8 @@ from horseshop.settings import DEBUG
 from horseshop import views
 
 urlpatterns = [
-    path('', views.index, name='home'),
+    path('', views.index, name='main'),
+    path('home/', views.home, name='home'),
     path('product/', include('product.urls', namespace='product')),
     path('shopauth/', include('shopauth.urls', namespace='shopauth')),
     path('admin/', admin.site.urls),
