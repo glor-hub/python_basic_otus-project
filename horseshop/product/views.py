@@ -5,5 +5,5 @@ from product.models import Product
 class ProductDetailView(DetailView):
     model = Product
 
-class ProductsListView(ListView):
+class ProductListView(ListView):
     model = Product

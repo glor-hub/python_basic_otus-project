@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block title %} Product List
+{% block title %} Category List
 {% endblock %}
 {% block main_content %}
     <ul>
         {% for object in object_list %}
-            <li><a href="{% url 'product:detail' object.pk %}">{{ object }}</a></li>
+            <li><a href="{% url 'subcategory:list' object.pk %}">{{ object }}</a></li>
             {% empty %}
             <li>No products yet.</li>
         {% endfor %}
