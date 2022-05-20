@@ -2,7 +2,6 @@ from django.core.management.base import BaseCommand
 
 from product.models import (
     Manufacturer,
-    Product,
 )
 
 class Command(BaseCommand):
