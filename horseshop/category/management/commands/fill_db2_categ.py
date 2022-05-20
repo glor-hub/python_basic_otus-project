@@ -15,18 +15,17 @@ class Command(BaseCommand):
                                        'Helmets&Hats',
                                        'Whips'],  # Хлысты
                          'For Horse': ['Saddles',  # Седла
-                                       'Saddle Pads'  # Вальтрапы
+                                       'Saddle Pads',  # Вальтрапы
                                        'Bridles',  # Уздечки
-                                       'Stirrups',  # Стремена
+                                       'Stirrups'  # Стремена
                                        ]
                          }
         categories = [
             'For Rider',
-            'For Horse',
+            'For Horse'
         ]
-
         for category in categories:
-            Category.objects.get_or_create(name=category)
+            categ=Category.objects.get(name=category)
             for subcategory in subcategories[category]:
                 Subcategory.objects.get_or_create(name=subcategory,
-                                                  category=Category(name=category))
+                                                  category=categ)
