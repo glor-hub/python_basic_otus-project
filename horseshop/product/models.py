@@ -29,9 +29,9 @@ class ProductProperty(models.Model):
     COLORS = [
         (BLACK, 'Black'),
         (WHITE, 'White'),
-        (BLUE, 'Blue')
+        (BLUE, 'Blue'),
         (BROWN, 'Brown'),
-        (RED, 'Red')
+        (RED, 'Red'),
         (GREEN, 'Green')
     ]
     CHILD = 'C'

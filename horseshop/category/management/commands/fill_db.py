@@ -28,5 +28,5 @@ class Command(BaseCommand):
         for category in categories:
             Category.objects.get_or_create(name=category)
             for subcategory in subcategories[category]:
-                SubCategory.objects.get_or_create(name=subcategory,
+                Subcategory.objects.get_or_create(name=subcategory,
                                                   category=Category(name=category))
