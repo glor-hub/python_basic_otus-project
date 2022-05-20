@@ -24,11 +24,15 @@ class ProductProperty(models.Model):
     BLUE = 'BL'
     BROWN = 'BR'
     RED = 'RD'
+    GREEN = 'GR'
+
     COLORS = [
         (BLACK, 'Black'),
         (WHITE, 'White'),
+        (BLUE, 'Blue')
         (BROWN, 'Brown'),
         (RED, 'Red')
+        (GREEN, 'Green')
     ]
     CHILD = 'C'
     MALE = 'M'
@@ -42,9 +46,13 @@ class ProductProperty(models.Model):
              (40, '40'),
              (42, '42'),
              (44, '44'),
-             (46, '46')
+             (46, '46'),
+             (120, '120'),
+             (130, '130'),
+             (140, '140'),
+             (150, '150'),
+             (160, '160'),
              ]
-    manufactured = models.PositiveIntegerField(default=0)
     color = models.CharField(max_length=2, choices=COLORS, default='BK')
     size = models.PositiveIntegerField(choices=SIZES, default=38)
     gender = models.CharField(max_length=1, choices=GENDER, default='M')
