@@ -12,8 +12,7 @@ class Command(BaseCommand):
         subcategories = {'For Rider': ['Riding Gloves',
                                        'Breeches',
                                        'Riding Boots',
-                                       'Helmets&Hats',
-                                       'Whips'],  # Хлысты
+                                       'Helmets&Hats'],
                          'For Horse': ['Saddles',  # Седла
                                        'Saddle Pads',  # Вальтрапы
                                        'Bridles',  # Уздечки
