@@ -146,10 +146,8 @@ img {
 /* Product card */
 
 /* Catalog */
-
-.catalog-card {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.06);
-    transition: all .3s;
+.catalog-card:hover {
+    box-shadow: 0 14px 30px -15px rgba(0, 0, 0, 0.75);
 }
 
 .catalog-card:hover {
@@ -165,3 +163,25 @@ img {
     color: #555;
     overflow: hidden;
 }
+
+.catalog-card a {
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.catalog-card a::after {
+    content: '';
+    display: block;
+    width: inherit;
+    background-color: #111;
+    /*height: 1px;*/
+    /*transition: all .3s;*/
+    transform: scale(0);
+}
+
+.catalog-card a:hover::after {
+    transform: scale(1);
+}
+
+/* Catalog */
