@@ -5,44 +5,53 @@
     <div class="container pt-5">
         <div class="h2"> Catalog</div>
         <div class="row pt-3">
-
-            <div class="col-sm-6">
-                <div class="catalog-card">
-                    <div class="p-3 border bg-light">
-                        <div class="h5">For Rider</div>
+            <div class="col-sm-5">
+                <div class="p-3">
+                    <div class="h5">For Rider</div>
+                    <div class="catalog-text">
                         <p>Riding gear is not just practical riding clothing and accessories.
                             Make a statement with your riding gear. Our stylish selection allows you
                             to outfit yourself in style at the stable and at the show.</p>
-
+                    </div>
+                    <div class="row g-4 pt-3">
                         {% for object in object_list %}
                             {% if object.category.name == 'For Rider' %}
+
                                 <ul class="list-group">
-                                    {{object}}
+                                    <div class="catalog-card">
+                                        <div class="ps-3 p-1 border bg-light">
+                                            {{ object }} →
+                                        </div>
+                                    </div>
                                 </ul>
                             {% endif %}
                         {% endfor %}
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-6">
-                <div class="catalog-card">
-                    <div class="p-3 border bg-light">
-                        <div class="h5">For Horse</div>
+            <div class="col-sm-5">
+                <div class="p-3">
+                    <div class="h5">For Horse</div>
+                    <div class="catalog-text">
                         <p>We supply horse equipment and accessories from saddles to bridles
                             in high-quality workmanship and for every riding style.
                             Our products are elegant, fashionable and functional at the same time.</p>
-                    {% for object in object_list %}
-                {% if object.category.name == 'For Horse' %}
-                    <ul class="list-group">
-                         {{object}}
-                    </ul>
-                {% endif %}
-            {% endfor %}</div>
+                    </div>
+                    <div class="row g-4 pt-3">
+                        {% for object in object_list %}
+                            {% if object.category.name == 'For Horse' %}
+
+                                <ul class="list-group">
+                                    <div class="catalog-card">
+                                        <div class="ps-3 p-1 border bg-light">
+                                            {{ object }} →
+                                        </div>
+                                    </div>
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-
-        </div>
-    </div>
 
 {% endblock %}
