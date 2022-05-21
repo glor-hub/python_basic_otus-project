@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %} Catalog
+{% endblock %}
+{% block main_content %}
+    <div class="container pt-5">
+        <div class="h2"> Catalog</div>
+        <div class="row pt-3">
+
+            <div class="col-sm-6">
+                <div class="catalog-card">
+                    <div class="p-3 border bg-light">
+                        <div class="h5">For Rider</div>
+                        <p>Riding gear is not just practical riding clothing and accessories.
+                            Make a statement with your riding gear. Our stylish selection allows you
+                            to outfit yourself in style at the stable and at the show.</p>
+
+                        {% for object in object_list %}
+                            {% if object.category.name == 'For Rider' %}
+                                <ul class="list-group">
+                                    {{object}}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="catalog-card">
+                    <div class="p-3 border bg-light">
+                        <div class="h5">For Horse</div>
+                        <p>We supply horse equipment and accessories from saddles to bridles
+                            in high-quality workmanship and for every riding style.
+                            Our products are elegant, fashionable and functional at the same time.</p>
+                    {% for object in object_list %}
+                {% if object.category.name == 'For Horse' %}
+                    <ul class="list-group">
+                         {{object}}
+                    </ul>
+                {% endif %}
+            {% endfor %}</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

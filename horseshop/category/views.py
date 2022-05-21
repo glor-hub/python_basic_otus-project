@@ -1,6 +1,10 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from category.models import Category
+from category.models import Subcategory
 
-class CategoryListView(ListView):
-    model = Category
+class SubcategoryListView(ListView):
+    model = Subcategory
+
+class CategoryDetailView(DetailView):
+    model = Subcategory

@@ -5,5 +5,7 @@ import category.views as category
 app_name = 'category'
 
 urlpatterns = [
-    path('list/', category.CategoryListView.as_view(), name='list'),
+    path('', category.SubcategoryListView.as_view(), name='list'),
+    path('detail/', category.CategoryDetailView.as_view(),
+         name='detail'),
 ]
