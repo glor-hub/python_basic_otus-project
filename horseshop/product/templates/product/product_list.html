@@ -2,6 +2,35 @@
 {% block title %} Product List
 {% endblock %}
 {% block main_content %}
+   <div class="container">
+        <div class="row">
+    {% for object in products %}
+            <div class="col-lg-4 col-sm-6 mb-3">
+        <div class="product-card">
+                    <div class="product-thumb">
+                        <a href="#"><img src="{{object.image.url}}"></a>
+                    </div>
+                    <div class="product-detail">
+                        <h4><a href="{% url 'product:detail' object.pk %}">{{object}}</a></h4>
+                        <div class="product-bottom-detail d-flex justify-content-between">
+                            <div class="product-price">
+                                {{object.curr_price}}
+                            </div>
+                            <div class="product-links">
+                                <a href="#"> <i
+                                        class="fa-solid fa-cart-shopping"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                 {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
     <ul>
         {% for object in products %}
             <li><a href="{% url 'product:detail' object.pk %}">{{ object }}</a></li>

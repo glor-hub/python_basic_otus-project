@@ -3,7 +3,31 @@
 {% block title %} Product detail
 {% endblock %}
 {% block main_content %}
-    <p>
-        {{ object }}
-    </p>
+    <div class="container">
+        <div class="row">
+    <div class="col-lg-4 col-sm-6 mb-3">
+        <div class="product-card">
+                    <div class="product-thumb">
+                        <a href="#"><img src="product/"></a>
+                    </div>
+                    <div class="product-detail">
+                        <h4><a href="#">{{object}}</a></h4>
+                        <p>{{object.description}}</p>
+                        <div class="product-bottom-detail d-flex justify-content-between">
+                            <div class="product-price">
+                                {{object.curr_price}}
+                            </div>
+                            <div class="product-links">
+                                <a href="#"> <i
+                                        class="fa-solid fa-cart-shopping"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
