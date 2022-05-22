@@ -63,6 +63,7 @@ class ProductProperty(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=64)
+    image=models.ImageField(upload_to='product/', null=True)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, null=True)
     curr_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     curr_count = models.PositiveIntegerField(default=1)
