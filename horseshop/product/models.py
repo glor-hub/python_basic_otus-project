@@ -19,47 +19,47 @@ class Manufacturer(models.Model):
         return f"{self.name} {self.country}"
 
 
-class ProductProperty(models.Model):
-    BLACK = 'BK'
-    WHITE = 'WT'
-    BLUE = 'BL'
-    BROWN = 'BR'
-    RED = 'RD'
-    GREEN = 'GR'
-
-    COLORS = [
-        (BLACK, 'Black'),
-        (WHITE, 'White'),
-        (BLUE, 'Blue'),
-        (BROWN, 'Brown'),
-        (RED, 'Red'),
-        (GREEN, 'Green')
-    ]
-    CHILD = 'C'
-    MALE = 'M'
-    FEMALE = 'F'
-    GENDER = [
-        (CHILD, 'Child'),
-        (MALE, 'Male'),
-        (FEMALE, 'Female')
-    ]
-    SIZES = [(38, '38'),
-             (40, '40'),
-             (42, '42'),
-             (44, '44'),
-             (46, '46'),
-             (120, '120'),
-             (130, '130'),
-             (140, '140'),
-             (150, '150'),
-             (160, '160'),
-             ]
-    color = models.CharField(max_length=2, choices=COLORS, default='BK')
-    size = models.PositiveIntegerField(choices=SIZES, default=38)
-    gender = models.CharField(max_length=1, choices=GENDER, default='M')
-
-    def __str__(self):
-        return f"color:{self.color}, size:{self.size}, gender:{self.gender}"
+# class ProductProperty(models.Model):
+#     BLACK = 'BK'
+#     WHITE = 'WT'
+#     BLUE = 'BL'
+#     BROWN = 'BR'
+#     RED = 'RD'
+#     GREEN = 'GR'
+#
+#     COLORS = [
+#         (BLACK, 'Black'),
+#         (WHITE, 'White'),
+#         (BLUE, 'Blue'),
+#         (BROWN, 'Brown'),
+#         (RED, 'Red'),
+#         (GREEN, 'Green')
+#     ]
+#     CHILD = 'C'
+#     MALE = 'M'
+#     FEMALE = 'F'
+#     GENDER = [
+#         (CHILD, 'Child'),
+#         (MALE, 'Male'),
+#         (FEMALE, 'Female')
+#     ]
+#     SIZES = [(38, '38'),
+#              (40, '40'),
+#              (42, '42'),
+#              (44, '44'),
+#              (46, '46'),
+#              (120, '120'),
+#              (130, '130'),
+#              (140, '140'),
+#              (150, '150'),
+#              (160, '160'),
+#              ]
+#     color = models.CharField(max_length=2, choices=COLORS, default='BK')
+#     size = models.PositiveIntegerField(choices=SIZES, default=38)
+#     gender = models.CharField(max_length=1, choices=GENDER, default='M')
+#
+#     def __str__(self):
+#         return f"color:{self.color}, size:{self.size}, gender:{self.gender}"
 
 
 class Product(models.Model):
@@ -70,7 +70,7 @@ class Product(models.Model):
     curr_count = models.PositiveIntegerField(default=1)
     is_active = models.BooleanField(default=True)
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, null=True)
-    property = models.ForeignKey(ProductProperty, on_delete=models.CASCADE, null=True)
+    # property = models.ForeignKey(ProductProperty, on_delete=models.CASCADE, null=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -114,47 +114,47 @@ def product_in_order_post_save(sender, instance, created, **kwargs):
 post_save.connect(product_in_order_post_save, sender=ProductInOrder)
 
 class ProductInCart(models.Model):
-    BLACK = 'BK'
-    WHITE = 'WT'
-    BLUE = 'BL'
-    BROWN = 'BR'
-    RED = 'RD'
-    GREEN = 'GR'
-
-    COLORS = [
-        (BLACK, 'Black'),
-        (WHITE, 'White'),
-        (BLUE, 'Blue'),
-        (BROWN, 'Brown'),
-        (RED, 'Red'),
-        (GREEN, 'Green')
-    ]
-    CHILD = 'C'
-    MALE = 'M'
-    FEMALE = 'F'
-    GENDER = [
-        (CHILD, 'Child'),
-        (MALE, 'Male'),
-        (FEMALE, 'Female')
-    ]
-    SIZES = [(38, '38'),
-             (40, '40'),
-             (42, '42'),
-             (44, '44'),
-             (46, '46'),
-             (120, '120'),
-             (130, '130'),
-             (140, '140'),
-             (150, '150'),
-             (160, '160'),
-             ]
+    # BLACK = 'BK'
+    # WHITE = 'WT'
+    # BLUE = 'BL'
+    # BROWN = 'BR'
+    # RED = 'RD'
+    # GREEN = 'GR'
+    #
+    # COLORS = [
+    #     (BLACK, 'Black'),
+    #     (WHITE, 'White'),
+    #     (BLUE, 'Blue'),
+    #     (BROWN, 'Brown'),
+    #     (RED, 'Red'),
+    #     (GREEN, 'Green')
+    # ]
+    # CHILD = 'C'
+    # MALE = 'M'
+    # FEMALE = 'F'
+    # GENDER = [
+    #     (CHILD, 'Child'),
+    #     (MALE, 'Male'),
+    #     (FEMALE, 'Female')
+    # ]
+    # SIZES = [(38, '38'),
+    #          (40, '40'),
+    #          (42, '42'),
+    #          (44, '44'),
+    #          (46, '46'),
+    #          (120, '120'),
+    #          (130, '130'),
+    #          (140, '140'),
+    #          (150, '150'),
+    #          (160, '160'),
+    #          ]
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    total_count = models.PositiveIntegerField(default=1)
-    color = models.CharField(max_length=2, choices=COLORS, default='BK')
-    size = models.PositiveIntegerField(choices=SIZES, default=38)
-    gender = models.CharField(max_length=1, choices=GENDER, default='M')
+    total_count = models.PositiveIntegerField(default=0)
+    # color = models.CharField(max_length=2, choices=COLORS, default='BK')
+    # size = models.PositiveIntegerField(choices=SIZES, default=38)
+    # gender = models.CharField(max_length=1, choices=GENDER, default='M')
     description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
     description = models.TextField(blank=True)
