@@ -1,11 +1,9 @@
 from django.shortcuts import get_object_or_404, render
 
-from product.models import Product
+from product.models import Product, ProductInCart
 from product.forms import ProductAddToCart
 
 from category.models import Subcategory
-
-
 
 
 def product_detail(request, pk):
@@ -33,19 +31,20 @@ def product_list(request, subcategory_slug=None):
 
 def cart_detail(request):
     products_in_cart = ProductInCart.objects.all()
-    context={'products_in_cart': products_in_cart}
-    return render(request, 'base.html',context)
+    context = {'products_in_cart': products_in_cart}
+    return render(request, 'base.html', context)
+
 
 def product_add_to_cart(request, product_pk):
-    if request.method==POST:
+    if request.method == 'POST':
         if form.is_valid():
             form = ProductAddToCart(request.POST)
             cleaned_data = form.cleaned_data
-            count=cleaned_data['quantity']
+            count = cleaned_data['quantity']
             product = get_object_or_404(Product, pk=product_pk)
-            product_to_cart=get_or_create(ProductToCart,product=product)
-            product_to_cart.count+=count
+            product_to_cart = ProductInCart.objects.get_or_create(product=product)
+            product_to_cart.count += count
             product_to_cart.save(update_fields=['count'])
             info_add_product = 'Product has been added to your Cart'
-    context={'info_add_product': info_add_product}
+    context = {'info_add_product': info_add_product}
     return render(request, 'product/product_detail.html', context)
