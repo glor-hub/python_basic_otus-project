@@ -6,7 +6,6 @@ from django.db.models.signals import post_save
 from category.models import Subcategory
 from order.models import Order
 
-
 # Create your models here.
 class Manufacturer(models.Model):
     name = models.CharField(max_length=64)
