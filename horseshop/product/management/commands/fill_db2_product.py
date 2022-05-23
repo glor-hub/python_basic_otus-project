@@ -26,6 +26,10 @@ class Command(BaseCommand):
                                            'count': 17,
                                            'manufacturer': Manufacturer(id=3),
                                            'subcategory': Subcategory(id=12)},
+                 'Roeckl Lona Riding gloves': {'price': 174,
+                                           'count': 9,
+                                           'manufacturer': Manufacturer(id=2),
+                                           'subcategory': Subcategory(id=11)},
                  'helmet "EQUESTRO FRAME"': {'price': 450,
                                              'count': 3,
                                              'manufacturer': Manufacturer(id=4),
@@ -35,7 +39,8 @@ class Command(BaseCommand):
             'saddle pad "COTTON" DR',
             'gloves "TRYON"',
             'breeches "Performans"',
-            'helmet "EQUESTRO FRAME"'
+            'helmet "EQUESTRO FRAME"',
+            'Roeckl Lona Riding gloves'
         ]
         for product in products:
             Product.objects.get_or_create(name=product,

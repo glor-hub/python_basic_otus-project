@@ -8,7 +8,11 @@
             <div class="col-lg-4 col-sm-6 mb-3">
         <div class="product-card">
                     <div class="product-thumb">
+                        {% if object.image %}
                         <a href="#"><img src="{{object.image.url}}"></a>
+                        {% else %}
+                        <a href="#"><img src="/static/img/product/no_product_image.png"></a>
+                        {% endif %}
                     </div>
                     <div class="product-detail">
                         <h4><a href="{% url 'product:detail' object.pk %}">{{object}}</a></h4>
@@ -25,8 +29,9 @@
                     </div>
 
                 </div>
+        </div>
                  {% endfor %}
-            </div>
+
         </div>
     </div>
 

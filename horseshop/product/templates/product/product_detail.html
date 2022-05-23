@@ -5,23 +5,32 @@
 {% block main_content %}
     <div class="container">
         <div class="row">
-    <div class="col-lg-4 col-sm-6 mb-3">
-        <div class="product-card">
+            <div class="col-lg-4 col-sm-6 mb-3">
+                <div class="product-card">
                     <div class="product-thumb">
-                        <a href="#"><img src="product/"></a>
+                        {% if product.image %}
+                            <a href="#"><img src="{{ product.image.url }}"></a>
+                        {% else %}
+                            <a href="#"><img src="/static/img/product/no_product_image.png"></a>
+                        {% endif %}
                     </div>
                     <div class="product-detail">
-                        <h4><a href="#">{{object}}</a></h4>
-                        <p>{{object.description}}</p>
+                        <h4><a href="#">{{ product }}</a></h4>
+                        <p>{{ product.description }}</p>
                         <div class="product-bottom-detail d-flex justify-content-between">
                             <div class="product-price">
-                                {{object.curr_price}}
+                                {{ product.curr_price }}
                             </div>
-                            <div class="product-links">
-                                <a href="#"> <i
-                                        class="fa-solid fa-cart-shopping"></i>
-                                </a>
-                            </div>
+                             <form action="{% url "product:cart_detail" product.pk %}" method="post">
+                                {{ product_to_cart_form }}
+                                {% csrf_token %}
+                                <button class="btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                            </form>
+{#                            <div class="product-links">#}
+{#                                <a href="#"> <i#}
+{#                                        class="fa-solid fa-cart-shopping"></i>#}
+{#                                </a>#}
+{#                            </div>#}
                         </div>
                     </div>
 
