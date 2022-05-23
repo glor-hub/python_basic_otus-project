@@ -1,9 +1,11 @@
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, render
 
 from product.models import Product
+from product.forms import ProductAddToCart
+
 from category.models import Subcategory
 
-from product.forms import ProductAddToCart
+
 
 
 def product_detail(request, pk):
