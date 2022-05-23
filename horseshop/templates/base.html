@@ -48,7 +48,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modal-cart"><i
+                    <a class="nav-link" href="{% url product:cart-detail %}" data-bs-toggle="modal" data-bs-target="#modal-cart"><i
                             class="fa-solid fa-cart-shopping"></i></a>
                 </li>
             </ul>
@@ -64,19 +64,23 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
+                                    {% for object in products_in_cart %}
                                     <th scope="row">1</th>
                                     <td><img src="{% static 'img/product/img1.png' %}"></td>
-                                    <td><a href="#">Шлем</a></td>
-                                    <td>234.99</td>
-                                    <td>3</td>
+                                    <td><a href="#">{{object.product.name}}</a></td>
+                                    <td>{{object.total_price}}</td>
+                                    <td>{{object.total.count}}</td>
+                                     {% endfor %}
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping
-                            </button>
-                            <button type="button" class="btn btn-primary">Proceed To Checkout</button>
+                            <a href="{% url "category:list" %}" class="btn btn-secondary" data-bs-dismiss="modal">Continue</a>
+<!--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping-->
+<!--                            </button>-->
+                            <a href="{% url "order:list" %}" class="btn btn-primary" >Proceed To Checkout</a>
+<!--                            <button type="button" class="btn btn-primary">Proceed To Checkout</button>-->
                         </div>
                     </div>
                 </div>

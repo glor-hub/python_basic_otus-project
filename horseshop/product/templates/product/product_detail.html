@@ -21,7 +21,7 @@
                             <div class="product-price">
                                 {{ product.curr_price }}
                             </div>
-                             <form action="{% url "product:cart_detail" product.pk %}" method="post">
+                             <form action="{% url "product:add_to_cart" product.pk %}" method="post">
                                 {{ product_to_cart_form }}
                                 {% csrf_token %}
                                 <button class="btn"><i class="fa-solid fa-cart-shopping"></i></button>
@@ -38,5 +38,5 @@
             </div>
         </div>
     </div>
-
+<p>{{info_add_product}}</p>
 {% endblock %}
