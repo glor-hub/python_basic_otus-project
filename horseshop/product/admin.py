@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, ProductInOrder,Manufacturer, ProductProperty, ProductInCart
+from .models import Product, ProductInOrder, Manufacturer, ProductProperty, ProductInCart
 
 # Register your models here.
 

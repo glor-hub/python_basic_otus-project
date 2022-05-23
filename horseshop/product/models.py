@@ -1,3 +1,4 @@
+from django import forms
 from django.db import models
 from django.db.models.signals import post_save
 
@@ -75,7 +76,6 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name}"
 
-
 class ProductInOrder(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
@@ -114,10 +114,48 @@ def product_in_order_post_save(sender, instance, created, **kwargs):
 post_save.connect(product_in_order_post_save, sender=ProductInOrder)
 
 class ProductInCart(models.Model):
+    BLACK = 'BK'
+    WHITE = 'WT'
+    BLUE = 'BL'
+    BROWN = 'BR'
+    RED = 'RD'
+    GREEN = 'GR'
+
+    COLORS = [
+        (BLACK, 'Black'),
+        (WHITE, 'White'),
+        (BLUE, 'Blue'),
+        (BROWN, 'Brown'),
+        (RED, 'Red'),
+        (GREEN, 'Green')
+    ]
+    CHILD = 'C'
+    MALE = 'M'
+    FEMALE = 'F'
+    GENDER = [
+        (CHILD, 'Child'),
+        (MALE, 'Male'),
+        (FEMALE, 'Female')
+    ]
+    SIZES = [(38, '38'),
+             (40, '40'),
+             (42, '42'),
+             (44, '44'),
+             (46, '46'),
+             (120, '120'),
+             (130, '130'),
+             (140, '140'),
+             (150, '150'),
+             (160, '160'),
+             ]
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_count = models.PositiveIntegerField(default=1)
+    color = models.CharField(max_length=2, choices=COLORS, default='BK')
+    size = models.PositiveIntegerField(choices=SIZES, default=38)
+    gender = models.CharField(max_length=1, choices=GENDER, default='M')
+    description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
     description = models.TextField(blank=True)
 
