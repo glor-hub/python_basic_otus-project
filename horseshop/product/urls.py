@@ -7,7 +7,6 @@ app_name = 'product'
 urlpatterns = [
     path('detail/<int:pk>/', product.product_detail, name='detail'),
     path('list/<slug:subcategory_slug>/', product.product_list, name='list'),
-    path('add/<int:pk>/', product.product_add_to_cart, name='add_to_cart'),
     path('cart/detail/', product.cart_detail, name='cart_detail'),
 
 ]
