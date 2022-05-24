@@ -48,7 +48,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url product:cart-detail %}" data-bs-toggle="modal" data-bs-target="#modal-cart"><i
+                    <a class="nav-link" href="{% url 'product:cart_detail' %}" data-bs-toggle="modal" data-bs-target="#modal-cart"><i
                             class="fa-solid fa-cart-shopping"></i></a>
                 </li>
             </ul>
@@ -64,6 +64,7 @@
                             <table class="table">
                                 <tbody>
                                 <tr>
+                                    {% if products_in_cart %}
                                     {% for object in products_in_cart %}
                                     <th scope="row">1</th>
                                     <td><img src="{% static 'img/product/img1.png' %}"></td>
@@ -71,6 +72,9 @@
                                     <td>{{object.total_price}}</td>
                                     <td>{{object.total.count}}</td>
                                      {% endfor %}
+                                {% else %}
+                                <p>Your Cart is empty</p>
+                                    {% endif %}
                                 </tr>
                                 </tbody>
                             </table>
@@ -85,8 +89,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </nav>
