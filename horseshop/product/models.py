@@ -156,7 +156,6 @@ class ProductInCart(models.Model):
     # gender = models.CharField(max_length=1, choices=GENDER, default='M')
     description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
-    description = models.TextField(blank=True)
 
     def save(self, *args, **kwargs):
         price_per_item = self.product.curr_price

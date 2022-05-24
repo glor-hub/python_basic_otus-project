@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
 from product.models import Product, ProductInCart
@@ -5,14 +6,25 @@ from product.forms import ProductAddToCart
 
 from category.models import Subcategory
 
-
 def product_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
     product_to_cart_form = ProductAddToCart()
-    info_add_product = None
-    context = {'product': product,
+    info_add_operation = ''
+    if request.method == 'POST':
+        form = ProductAddToCart(request.POST)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            count = int(cleaned_data['quantity'])
+            product = get_object_or_404(Product, pk=pk)
+            ProductInCart.objects.get_or_create(product=product)
+            product_to_cart = get_object_or_404(ProductInCart, product=product)
+            product_to_cart.total_count += count
+            product_to_cart.save()
+            info_add_operation='Product has been added to your Cart'
+    product_in_cart=ProductInCart.objects.all()
+    context = {'product': product, 'product_in_cart': product_in_cart,
                'product_to_cart_form': product_to_cart_form,
-               'info_add_product': info_add_product}
+               'info_add_operation': info_add_operation}
     return render(request, 'product/product_detail.html', context)
 
 
@@ -33,18 +45,3 @@ def cart_detail(request):
     products_in_cart = ProductInCart.objects.all()
     context = {'products_in_cart': products_in_cart}
     return render(request, 'base.html', context)
-
-
-def product_add_to_cart(request, product_pk):
-    if request.method == 'POST':
-        if form.is_valid():
-            form = ProductAddToCart(request.POST)
-            cleaned_data = form.cleaned_data
-            count = cleaned_data['quantity']
-            product = get_object_or_404(Product, pk=product_pk)
-            product_to_cart = ProductInCart.objects.get_or_create(product=product)
-            product_to_cart.count += count
-            product_to_cart.save(update_fields=['count'])
-            info_add_product = 'Product has been added to your Cart'
-    context = {'info_add_product': info_add_product}
-    return render(request, 'product/product_detail.html', context)
