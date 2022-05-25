@@ -28,6 +28,7 @@ urlpatterns = [
     path('shopauth/', include('shopauth.urls', namespace='shopauth')),
     path('admin/', admin.site.urls),
     path('catalog/', include('category.urls', namespace='category')),
+    path('order/', include('order.urls', namespace='order')),
 ]
 # ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

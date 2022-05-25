@@ -12,11 +12,11 @@ from django import forms
 #             'size': 'Size'
 #         }
 
-PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 51)]
+PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(0, 51)]
 
 
 class ProductAddToCart(forms.Form):
     quantity = forms.TypedChoiceField(choices=PRODUCT_QUANTITY_CHOICES,
-                                      coerce=int)
-    update = forms.BooleanField(required=False, initial=False,
+                                      coerce=int, initial=1)
+    update = forms.BooleanField(required=False, initial=True,
                                 widget=forms.HiddenInput)

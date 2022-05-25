@@ -48,48 +48,9 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'product:cart_detail' %}" data-bs-toggle="modal" data-bs-target="#modal-cart"><i
+                    <a class="nav-link"  href="{% url "product:cart_detail" %}" ><i
                             class="fa-solid fa-cart-shopping"></i></a>
                 </li>
-            </ul>
-            <div class="modal fade" id="modal-cart" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header bg-primary text-white">
-                            <h5 class="modal-title" id="exampleModalLabel">My Shopping Cart</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table">
-                                <tbody>
-                                <tr>
-                                    {% if products_in_cart %}
-                                    {% for object in products_in_cart %}
-                                    <th scope="row">1</th>
-                                    <td><img src="{% static 'img/product/img1.png' %}"></td>
-                                    <td><a href="#">{{object.product.name}}</a></td>
-                                    <td>{{object.total_price}}</td>
-                                    <td>{{object.total.count}}</td>
-                                     {% endfor %}
-                                {% else %}
-                                <p>Your Cart is empty</p>
-                                    {% endif %}
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="{% url "category:list" %}" class="btn btn-secondary" data-bs-dismiss="modal">Continue</a>
-<!--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping-->
-<!--                            </button>-->
-                            <a href="#" class="btn btn-primary" >Proceed To Checkout</a>
-{#                            <a href="{% url "order:list" %}" class="btn btn-primary" >Proceed To Checkout</a>#}
-<!--                            <button type="button" class="btn btn-primary">Proceed To Checkout</button>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </nav>
@@ -100,23 +61,20 @@
 
 {% endblock %}
 
-{% block menu %}
-    <ul>
-        <li><a href="{% url 'shopauth:register' %}">user registration</a></li>
-        <li>
-            {% if user.is_anonymous %}
-                <a href="{% url 'shopauth:login' %}">login</a>
-            {% else %}
-                <a href="{% url 'shopauth:logout' %}">logout</a>
-                <br>
-                <br>
-
-            {% endif %}
-        </li>
-    </ul>
-{#    {% block product_list %}#}
-{#        <a href="{% url 'product:list' %}">to products list </a>#}
-{#    {% endblock %}{% endblock %}#}
-{% endblock %}
+{#{% block menu %}#}
+{#    <ul>#}
+{#        <li><a href="{% url 'shopauth:register' %}">user registration</a></li>#}
+{#        <li>#}
+{#            {% if user.is_anonymous %}#}
+{#                <a href="{% url 'shopauth:login' %}">login</a>#}
+{#            {% else %}#}
+{#                <a href="{% url 'shopauth:logout' %}">logout</a>#}
+{#                <br>#}
+{#                <br>#}
+{##}
+{#            {% endif %}#}
+{#        </li>#}
+{#    </ul>#}
+{#{% endblock %}#}
 </body>
 </html>

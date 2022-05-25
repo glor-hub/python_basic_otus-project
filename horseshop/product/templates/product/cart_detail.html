@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} Cart
+{% endblock %}
+{% block main_content %}
+    <h5>Your Cart({{ total_count }})</h5>
+    {% if products_in_cart %}
+
+
+        <table class="table">
+            <tbody>
+            <tr>
+                {% for object in products_in_cart %}
+
+                    {#    <th scope="row"></th>#}
+                    <td><a href="#">{{ object.product.name }}</a></td>
+                    {#                   <td> <form action="" method="POST">#}
+                    {#                        {{ formset.management_data }}#}
+                    {#                       {{  formset}}#}
+                    {#                        {% csrf_token %}#}
+                    {#                       {% count_set+=1 %}#}
+                    {#                        <button class="btn"><i class="fa-regular fa-square-check"</i></button>#}
+                    {#                       <button class="btn">ok</button>#}
+                    {#                    </form></td>#}
+                    <td>{{ object.total_count }}</td>
+                    <td>{{ object.total_price }}</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h5> Total Cost: {{ total_cost }}</h5>
+    {% else %}
+        <h5>Your Cart is empty</h5>>
+    {% endif %}
+{% endblock %}

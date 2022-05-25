@@ -1,2 +1,5 @@
+from django.views.generic import ListView
+from order.models import Order
 
-# Create your views here.
+class OrderListView(ListView):
+    model = Order
