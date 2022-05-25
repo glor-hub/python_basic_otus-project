@@ -1,4 +1,4 @@
-% extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 
@@ -10,14 +10,14 @@ Checkout
 
 {% endblock %}
 
-{% block main content %}
+{% block main_content %}
 {% if user.is_anonymous %}
-<h1>Login to Account</h1>
+<h3>Login to Account</h3>
 <a href="{% url 'shopauth:login' %}">Login</a>
-<h1>New at MagicHorze? Register now!</h1>
+<h3>New at Magic Horze? Register now!</h3>
 <a href="{% url 'shopauth:login' %}">Register</a>
 {% else %}
-<h1>Checkout</h1>
+<h3>Checkout</h3>
 <div class="order-info">
     <h3>Your order</h3>
     <ul>

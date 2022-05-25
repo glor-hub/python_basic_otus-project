@@ -14,22 +14,21 @@ class Customer(models.Model):
 
 
 class Order(models.Model):
-    # CREATED = 'C'
-    # ACTIVE = 'A'
-    # FINISHED = 'F'
-    # STATUS = [
-    #     (CREATED, 'Created'),
-    #     (ACTIVE, 'Active'),
-    #     (FINISHED, 'Finished')
-    # ]
+    CREATED = 'C'
+    ACTIVE = 'A'
+    FINISHED = 'F'
+    STATUS = [
+        (CREATED, 'Created'),
+        (ACTIVE, 'Active'),
+        (FINISHED, 'Finished')
+    ]
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_created=False, auto_now_add=True)
-    updated_at = models.DateTimeField(auto_created=True, auto_now_add=False)
     status = models.CharField(max_length=1, choices=STATUS, default='C')
     comment = models.TextField(blank=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2,
                                       default=0)  # total price for all products in order
     total_count = models.PositiveIntegerField(default=1)  # total count of products in order
 
-    def __str__(self):
-        return f"order {self.pk} status {self.status}"
+    # def __str__(self):
+    #     return f"order {self.pk} status {self.status}"
