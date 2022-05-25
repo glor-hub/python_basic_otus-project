@@ -21,8 +21,8 @@
                                     {{ object.curr_price }}
                                 </div>
                                 <div class="product-links">
-                                    <a href="#"> <i
-                                            class="fa-solid fa-cart-shopping"></i>
+{#                                    <a href="#"> <i#}
+{#                                            class="fa-solid fa-cart-shopping"></i>#}
                                     </a>
                                 </div>
                             </div>
@@ -34,13 +34,6 @@
 
         </div>
     </div>
-
-
-    <ul>
-        {% for object in products %}
-            <li><a href="{% url 'product:detail' object.pk %}">{{ object }}</a></li>
-        {% endfor %}
-    </ul>
 {% endblock %}
 {% block product_list %}
 {% endblock %}
