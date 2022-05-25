@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Thank you{% endblock %}
+
+{% block main content %}
+
+<h1>Thank you</h1>
+<p>Your Order has been successfully completed.
+    Your Order number is <strong>{{ order.id }}</strong>.</p>
+<p>Your order has been successfully completed.
+    Your Order status is <strong>{{ order.status }}</strong>.</p>
+<table class="table">
+    <tbody>
+    <tr>
+        {% for object in products_in_order %}
+        <th scope="row"></th>
+        <td><a href="">{{ object.product.name }}</a></td>
+        <td>{{ object.total_count }}</td>
+        <td>{{ object.total_price }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<h5> Total Cost: {{ total_cost }}</h5>
+{% endblock %}

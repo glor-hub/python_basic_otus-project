@@ -1,0 +1,39 @@
+% extends "base.html" %}
+
+{% block title %}
+
+{% if user.is_anonymous %}
+Login
+{%else%}
+Checkout
+{%endif%}
+
+{% endblock %}
+
+{% block main content %}
+{% if user.is_anonymous %}
+<h1>Login to Account</h1>
+<a href="{% url 'shopauth:login' %}">Login</a>
+<h1>New at MagicHorze? Register now!</h1>
+<a href="{% url 'shopauth:login' %}">Register</a>
+{% else %}
+<h1>Checkout</h1>
+<div class="order-info">
+    <h3>Your order</h3>
+    <ul>
+        {% for item in cart %}
+        <li>
+            {{ item.quantity }}x {{ item.product.name }}
+            <span>${{ item.total_price }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <p>Total: ${{ cart.get_total_price }}</p>
+</div>
+<form action="." method="post" class="order-form">
+    {{ form.as_p }}
+    <p><input type="submit" value="Proceed order"></p>
+    {% csrf_token %}
+</form>
+{% endif%}
+{% endblock %}
