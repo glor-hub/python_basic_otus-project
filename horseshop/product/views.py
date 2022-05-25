@@ -41,33 +41,6 @@ def product_list(request, subcategory_slug=None):
                    'products': products}
     return render(request, 'product/product_list.html', context)
 
-
-# def cart_detail(request):
-#     context = {}
-#     total_count = 0
-#     total_cost=0
-#     ProductAddToCartSet = formset_factory(ProductAddToCart)
-#     products_in_cart = ProductInCart.objects.all()
-#     for product in products_in_cart:
-#         total_count += product.total_count
-#         total_cost += product.total_price
-#     if request.method == 'POST':
-#         formset = ProductAddToCartSet(request.POST)
-#         if formset.is_valid():
-#             for form in formset:
-#                 cleaned_data = form.cleaned_data
-#                 count = int(cleaned_data['quantity'])
-#                 product_to_cart = get_object_or_404(ProductInCart, product=product)
-#                 product_to_cart.total_count += count
-#                 product_to_cart.save()
-#
-#     else:
-#         formset = ProductAddToCartSet()
-#     context = {'products_in_cart': products_in_cart, 'total_count': total_count,
-#                'total_cost': total_cost, 'formset': formset
-#                }
-#     return render(request, 'product/cart_detail.html', context)
-
 def cart_detail(request):
     context = {}
     total_count = 0
@@ -80,3 +53,28 @@ def cart_detail(request):
                'total_cost': total_cost
                }
     return render(request, 'product/cart_detail.html', context)
+
+def cart_add_item(request, pk):
+    product=get_object_or_404(ProductInCart,pk=pk)
+    quantity = product.total_count
+    quantity+=1
+    product.total_count=quantity
+    product.save()
+    return cart_detail(request)
+
+def cart_reduce_item(request, pk):
+    product=get_object_or_404(ProductInCart,pk=pk)
+    quantity = product.total_count
+    quantity-=1
+    if quantity==0:
+        product.delete()
+        return cart_detail(request)
+    product.total_count=quantity
+    product.save()
+    return cart_detail(request)
+
+
+def cart_delete_item(request, pk):
+    product=get_object_or_404(ProductInCart,pk=pk)
+    product.delete()
+    return cart_detail(request)

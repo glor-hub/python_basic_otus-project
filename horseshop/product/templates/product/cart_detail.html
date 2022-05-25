@@ -20,8 +20,12 @@
                     {% endif %}
             </td>
                    <td> <a href="{% url 'product:detail' object.product.pk %}">{{ object.product.name }}</a> </td>
-                    <td>{{ object.total_count }}</td>
+
+                <td><a href="{% url 'product:cart_reduce_item' object.pk %}">  <button id="minus">-</button></a></td>
+                <td>{{ object.total_count }}</td>
+            <td><a href="{% url 'product:cart_add_item' object.pk %}">   <button id="plus">+</button></a></td>
                     <td>{{ object.total_price }}</td>
+            <td><a href="{% url 'product:cart_delete_item' object.pk %}">   <button id="plus">x</button></a></td>
 </th>
             </tr>
              {% endfor %}
@@ -30,7 +34,7 @@
 
         <h5> Total Cost: {{ total_cost }}</h5>
     {% else %}
-        <h5>Your Cart is empty</h5>>
+        <h5>Your Cart is empty</h5>
     {% endif %}
     <h5><a href="{% url 'order:create' %}">To Checkout</a></h5>
 {% endblock %}
