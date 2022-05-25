@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar navbar-light"
      style="background-image: linear-gradient(-45deg, #c2a3f8,#e3d7fa)">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url "main" %}">Magic Horse</a>
+        <a class="navbar-brand" href="{% url " main" %}">Magic Horse</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,10 +29,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 top-menu">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "home" %}">Home</a>
+                    <a class="nav-link" href="{% url " home" %}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "category:list" %}">Catalog</a>
+                    <a class="nav-link" href="{% url " category:list" %}">Catalog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">News</a>
@@ -43,13 +43,21 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"><i
                             class="far fa-user"></i></a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Login</a></li>
-                        <li><a class="dropdown-item" href="#">Register</a></li>
+                        {% if user.is_anonymous %}
+                        <li><a class="dropdown-item" href="{% url 'shopauth:login' %}">Login</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'shopauth:logout' %}">Logout</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" href="{% url 'shopauth:register' %}">Register</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"  href="{% url "product:cart_detail" %}" ><i
-                            class="fa-solid fa-cart-shopping"></i></a>
+                    <a class="nav-link" href="{% url " product:cart_detail" %}" ><i
+                        class="fa-solid fa-cart-shopping"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url " product:order_detail" %}" >
+                    <i class="fa-solid fa-list-ul"></i></a>
                 </li>
         </div>
     </div>
@@ -62,19 +70,27 @@
 {% endblock %}
 
 {#{% block menu %}#}
-{#    <ul>#}
-{#        <li><a href="{% url 'shopauth:register' %}">user registration</a></li>#}
-{#        <li>#}
-{#            {% if user.is_anonymous %}#}
-{#                <a href="{% url 'shopauth:login' %}">login</a>#}
-{#            {% else %}#}
-{#                <a href="{% url 'shopauth:logout' %}">logout</a>#}
-{#                <br>#}
-{#                <br>#}
-{##}
-{#            {% endif %}#}
-{#        </li>#}
-{#    </ul>#}
+{#
+<ul>#}
+    {#
+    <li><a href="{% url 'shopauth:register' %}">user registration</a></li>
+    #}
+    {#
+    <li>#}
+        {# {% if user.is_anonymous %}#}
+        {# <a href="{% url 'shopauth:login' %}">login</a>#}
+        {# {% else %}#}
+        {# <a href="{% url 'shopauth:logout' %}">logout</a>#}
+        {# <br>#}
+        {# <br>#}
+        {##}
+        {# {% endif %}#}
+        {#
+    </li>
+    #}
+    {#
+</ul>
+#}
 {#{% endblock %}#}
 </body>
 </html>
