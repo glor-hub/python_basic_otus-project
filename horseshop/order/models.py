@@ -14,14 +14,14 @@ class Customer(models.Model):
 
 
 class Order(models.Model):
-    CREATED = 'C'
-    ACTIVE = 'A'
-    FINISHED = 'F'
-    STATUS = [
-        (CREATED, 'Created'),
-        (ACTIVE, 'Active'),
-        (FINISHED, 'Finished')
-    ]
+    # CREATED = 'C'
+    # ACTIVE = 'A'
+    # FINISHED = 'F'
+    # STATUS = [
+    #     (CREATED, 'Created'),
+    #     (ACTIVE, 'Active'),
+    #     (FINISHED, 'Finished')
+    # ]
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_created=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_created=True, auto_now_add=False)
