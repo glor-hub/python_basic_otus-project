@@ -14,33 +14,31 @@ def order_create(request):
     total_count=0
     form = OrderCreateForm()
     products_in_cart = ProductInCart.objects.all()
-    if request.method == 'POST':
-        # if user.is_anonymous
-        #     return render(request, 'orders/order_create.html',
-        #                   context)
-        form = OrderCreateForm(request.POST)
-        if form.is_valid():
-            customer = form.save()
-            Order.objects.get_or_create(customer=customer)
-            order =get_object_or_404(Order, customer=customer)
-            for product in products_in_cart:
-                ProductInOrder.objects.get_or_create(order=order,
-                                                     product=product.product,
-                                                     total_price=product.total_price,
-                                                     total_count=product.total_count)
-                total_cost += product.total_price
-                total_count += product.total_count
-            order.total_price=total_cost
-            order.total_count = total_count
-            order.save()
-            ProductInCart.objects.all().delete()
-            products_in_order = ProductInOrder.objects.filter(order=order)
-            context = {'products_in_order': products_in_order,
-                       'order': order,
-                       'form': form
-                       }
-            return render(request, 'order/order_created.html',
-                          context)
+    if products_in_cart:
+        if request.method == 'POST':
+            form = OrderCreateForm(request.POST)
+            if form.is_valid():
+                customer = form.save()
+                Order.objects.get_or_create(customer=customer)
+                order =get_object_or_404(Order, customer=customer)
+                for product in products_in_cart:
+                    ProductInOrder.objects.get_or_create(order=order,
+                                                         product=product.product,
+                                                         total_price=product.total_price,
+                                                         total_count=product.total_count)
+                    total_cost += product.total_price
+                    total_count += product.total_count
+                order.total_price=total_cost
+                order.total_count = total_count
+                order.save()
+                ProductInCart.objects.all().delete()
+                products_in_order = ProductInOrder.objects.filter(order=order)
+                context = {'products_in_order': products_in_order,
+                           'order': order,
+                           'form': form
+                           }
+                return render(request, 'order/order_created.html',
+                              context)
     for product in products_in_cart:
         total_cost += product.total_price
         total_count += product.total_count

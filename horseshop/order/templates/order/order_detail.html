@@ -1,40 +1,67 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block title %}Order{% endblock %}
-
+{% block title %} Order
+{% endblock %}
 {% block main_content %}
-
-    <h3>Your Orders</h3>
-
     {% if orders %}
-        {% for order in orders %}
-        Order number is <strong>{{ order.pk}}</strong>.</p>
-        Order status is <strong>{{ order.status }}</strong>.</p>
-        <table class="table">
-            <tbody>
+        <div class="container mt-3 pt-2 border">
+            <div class="row">
+                {% for order in orders %}
+                    <div class="col-sm-8 p-3">
+                        <h5>
+                            Order #{{ order.pk }}
+                            Status:
+                            {% ifequal order.status "C" %} created
+                            {% endifequal %}
+                            {% ifequal order.status "A" %} active
+                            {% endifequal %}
+                            {% ifequal order.status "F" %} finished
+                            {% endifequal %}
+                        </h5>
+                        <table class="table table-bordered ">
+                            <thead class="table-success">
+                            <tr>
+                                <th></th>
+                                <th scope="row" class="text-center">Item Name</th>
+                                <th scope="row" class="text-center">Quantity</th>
+                                <th scope="row" class="text-center">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for object in products_in_order %}
+                                {% ifequal object.order order %}
+                                    <tr>
+                                        <td class="text-center align-middle">{% if object.product.image %}
+                                            <a href="#"><img src="{{ object.product.image.url }}"></a>
+                                        {% else %}
+                                            {#                        <a href="#"><img src="/static/img/product/no_product_image.png"></a>#}
+                                        {% endif %}
+                                        </td>
+                                        <td class="text-center align-middle"><a
+                                                href="{% url 'product:detail' object.product.pk %}">{{ object.product.name }}</a>
+                                        </td>
+                                        <td class="text-center align-middle">{{ object.total_count }}</td>
+                                        <td class="text-center align-middle">{{ object.total_price }}</td>
+                                    </tr>
+                                {% endifequal %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <h5>
+                                    <td class="align-middle text-end"><b>Total Cost: {{ order.total_price }}</b></td>
+                                </h5>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-                {% for object in products_in_order %}
-                    {% ifequal object.order order %}
-              <tr>
-                    <th scope="row"></th>
-                    <td>{% if object.product.image %}
-                        <a href="#"><img src="{{ object.product.image.url }}"></a>
-                    {% else %}
-{#                        <a href="#"><img src="/static/img/product/no_product_image.png"></a>#}
-                    {% endif %}
-                    </td>
-               <td><a href="{% url 'product:detail' object.product.pk %}">{{ object.product.name }}</a></td>
-                    <td>{{ object.total_count }}</td>
-                    <td>{{ object.total_price }}</td>
-
-                    </tr>
-                    {% endifequal %}
                 {% endfor %}
-            </tbody>
-        </table>
-        <h5> Total Cost: {{ order.total_price }}</h5>
-        {% endfor %}
+            </div>
+        </div>
     {% else %}
-        You don't have any Orders.
+        <br> <h5>You Don't Have Any Orders.</h5>
     {% endif %}
 {% endblock %}

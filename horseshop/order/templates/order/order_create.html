@@ -1,39 +1,36 @@
 {% extends "base.html" %}
 
-{% block title %}
-
-{% if user.is_anonymous %}
-Login
-{%else%}
-Checkout
-{%endif%}
-
+{% block title %}Order Create
 {% endblock %}
-
 {% block main_content %}
-{% if user.is_anonymous %}
-<h3>Login to Account</h3>
-<a href="{% url 'shopauth:login' %}">Login</a>
-<h3>New at Magic Horze? Register now!</h3>
-<a href="{% url 'shopauth:login' %}">Register</a>
-{% else %}
-<h3>Checkout</h3>
-<div class="order-info">
-    <h3>Your order</h3>
-    <ul>
-        {% for item in cart %}
-        <li>
-            {{ item.quantity }}x {{ item.product.name }}
-            <span>${{ item.total_price }}</span>
-        </li>
-        {% endfor %}
-    </ul>
-    <p>Total: ${{ cart.get_total_price }}</p>
-</div>
-<form action="." method="post" class="order-form">
-    {{ form.as_p }}
-    <p><input type="submit" value="Proceed order"></p>
-    {% csrf_token %}
-</form>
-{% endif%}
+
+    <div class="container mt-3 pt-2 border">
+        <div class="row">
+            <div class="col-sm-8 p-3">
+                {% if products_in_cart %}
+                    {% if user.is_anonymous %}
+                        <h3>Login To Account</h3>
+                        <h5><a href="{% url 'shopauth:login' %}">
+                            <button class="btn btn-success">Login</button>
+                        </a></h5>
+                        <h3>New At Magic Horse? Register Now!</h3>
+
+                        <h5><a href="{% url 'shopauth:register' %}">
+                        <button class="btn btn-success">Register</button>
+                    {% else %}
+                        <h3>Checkout</h3>
+                        <br>
+                        <form action="." method="post" class="order-form">
+                            {{ form.as_p }}
+                            <p><input type="submit" class="btn btn-success" value="Proceed order"></p>
+                            {% csrf_token %}
+                        </form>
+                    {% endif %}
+                {% else %}
+                <h5>Your Order is already proceeded.</h5>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

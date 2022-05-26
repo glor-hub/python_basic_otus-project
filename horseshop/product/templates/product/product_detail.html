@@ -3,64 +3,98 @@
 {% block title %} Product Detail
 {% endblock %}
 {% block main_content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-sm-6 mb-3">
-                <div class="product-card">
-                    <div class="product-thumb">
-                        {% if product.image %}
-                            <a href="#"><img src="{{ product.image.url }}"></a>
-                        {% else %}
-                            <a href="#"><img src="/static/img/product/no_product_image.png"></a>
-                        {% endif %}
-                    </div>
-                    <div class="product-detail">
-                        <h4><a href="#">{{ product }}</a></h4>
-                        <p>{{ product.description }}</p>
-                        <div class="product-bottom-detail d-flex justify-content-between">
-                            <div class="product-price">
-                                {{ product.curr_price }}
-                            </div>
-                            <form action="" method="POST">
-                                {{ product_to_cart_form }}
-                                {% csrf_token %}
-                                <button class="btn"><i class="fa-solid fa-cart-plus"></i></button>
-                            </form>
-                            {% if add_operation_success %}
-                                <a class="btn" href="" data-bs-toggle="modal" data-bs-target="#modal-cart">
-                                        <i class="fa-solid fa-circle-info"></i></a>
-                                <div class=" modal fade" id="modal-cart" tabindex="-1"
-                                     aria-labelledby="exampleModalLabel"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-xl">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-primary text-white">
-                                                <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <table class="table">
-                                                    <tbody>
-                                                    <tr>
-                                                        <h5>Products Is Added To Cart </h5>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="modal-footer" data-bs-dismiss="modal">
-                                                <a href="{% url "category:list" %}" class="btn btn-secondary">Continue Shopping</a>
-                                                <a href="{% url "product:cart_detail" %}" class="btn btn-success">To Cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
+    <div class="container mt-3 pt-2">
 
+        <div class="col-sm-8 p-3 border">
+            <div class="row">
+                <div class="col">
+                    {% if product.image %}
+                        <a href="#"><img src="{{ product.image.url }}"
+                                         class="float-start" alt="Item_Image" width="304" height="236"></a>
+                    {% else %}
+                        <a href="#"><img src="/static/img/product/no_product_image.png"
+                                         class="float-start" alt="Item_Image" width="304" height="236"></a>
+                    {% endif %}
+                </div>
+                <div class="col product-detail">
+                    <h4><a href="#">{{ product }}</a></h4>
+                    <p>Colors: {{ product.manufacturer.color }}</p>
+                    <p>Sizes: {{ product.manufacturer.sizes }}</p>
+                    <p>Manufacturer: {{ product.manufacturer.name }}</p>
+                    <p>Description: {{ product.description }}</p>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col">{% if add_operation_success %}
+                    <div class="row">
+                        <h5>Items Is Added To Cart </h5>
+                       <a href="{% url "product:cart_detail" %}">
+                            <button class="btn btn-success">To Cart</button>
+                        </a>
+
+                    </div>
+                {% endif %} </div>
+                <div class="col">
+                    <div class="product-bottom-detail d-flex justify-content-between">
+                        <div class="product-price" >{{ product.curr_price }}</div>
+                        <form action="" method="POST">
+                            {{ product_to_cart_form }}
+                            {% csrf_token %}
+                            <button class="btn"><i class="fa-solid fa-cart-plus"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            {#                        <p>{{ product.description }}</p>#}
+            {#                        <div class="product-bottom-detail d-flex justify-content-between">#}
+            {#                            <div class="product-price">#}
+            {#                                {{ product.curr_price }}#}
+            {#                            </div>#}
+            {#                            <form action="" method="POST">#}
+            {#                                {{ product_to_cart_form }}#}
+            {#                                {% csrf_token %}#}
+            {#                                <button class="btn"><i class="fa-solid fa-cart-plus"></i></button>#}
+            {#                            </form>#}
+            {#                            {% if add_operation_success %}#}
+            {#                                <a class="btn" href="" data-bs-toggle="modal" data-bs-target="#modal-cart">#}
+            {#                                    <i class="fa-solid fa-circle-info"></i></a>#}
+            {#                                <div class=" modal fade" id="modal-cart" tabindex="-1"#}
+            {#                                     aria-labelledby="exampleModalLabel"#}
+            {#                                     aria-hidden="true">#}
+            {#                                    <div class="modal-dialog modal-xl">#}
+            {#                                        <div class="modal-content">#}
+            {#                                            <div class="modal-header bg-primary text-white">#}
+            {#                                                <h5 class="modal-title" id="exampleModalLabel"></h5>#}
+            {#                                                <button type="button" class="btn-close" data-bs-dismiss="modal"#}
+            {#                                                        aria-label="Close"></button>#}
+            {#                                            </div>#}
+            {#                                            <div class="modal-body">#}
+            {#                                                <table class="table">#}
+            {#                                                    <tbody>#}
+            {#                                                    <tr>#}
+            {#                                                        <h5>Items Is Added To Cart </h5>#}
+            {#                                                    </tr>#}
+            {#                                                    </tbody>#}
+            {#                                                </table>#}
+            {#                                            </div>#}
+            {#                                            <div class="modal-footer" data-bs-dismiss="modal">#}
+            {#                                                <a href="{% url "category:list" %}" class="btn btn-secondary">Continue#}
+            {#                                                    Shopping</a>#}
+            {#                                                <a href="{% url "product:cart_detail" %}" class="btn btn-primary">To#}
+            {#                                                    Cart</a>#}
+            {#                                            </div>#}
+            {#                                        </div>#}
+            {#                                    </div>#}
+            {#                                </div>#}
+            {#                            {% endif %}#}
+            {#                        </div>#}
+            {#                    </div>#}
+            {##}
+            {#            </div>#}
+            {##}
         </div>
     </div>
 {% endblock %}

@@ -30,5 +30,5 @@ class Order(models.Model):
                                       default=0)  # total price for all products in order
     total_count = models.PositiveIntegerField(default=1)  # total count of products in order
 
-    # def __str__(self):
-    #     return f"order {self.pk} status {self.status}"
+    def __str__(self):
+        return f"order {self.pk} status {self.status}"
