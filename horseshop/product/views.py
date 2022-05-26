@@ -44,12 +44,17 @@ def product_list(request, subcategory_slug=None):
 def cart_detail(request):
     context = {}
     total_count = 0
-    total_cost=0
+    subtotal_cost=0
+    ship_cost=0.00
     products_in_cart = ProductInCart.objects.all()
     for product in products_in_cart:
         total_count += product.total_count
-        total_cost += product.total_price
-    context = {'products_in_cart': products_in_cart, 'total_count': total_count,
+        subtotal_cost += product.total_price
+    total_cost= subtotal_cost + ship_cost
+    context = {'products_in_cart': products_in_cart,
+               'total_count': total_count,
+               'subtotal_cost': subtotal_cost,
+               'ship_cost': shipcost,
                'total_cost': total_cost
                }
     return render(request, 'product/cart_detail.html', context)

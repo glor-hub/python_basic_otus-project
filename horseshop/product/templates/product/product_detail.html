@@ -27,8 +27,8 @@
                                 <button class="btn"><i class="fa-solid fa-cart-plus"></i></button>
                             </form>
                             {% if add_operation_success %}
-                                <a class="btn" href="" data-bs-toggle="modal" data-bs-target="#modal-cart"><i
-                                        < class="fa-solid fa-arrow-right-long"></i></a>
+                                <a class="btn" href="" data-bs-toggle="modal" data-bs-target="#modal-cart">
+                                        <i class="fa-solid fa-circle-info"></i></a>
                                 <div class=" modal fade" id="modal-cart" tabindex="-1"
                                      aria-labelledby="exampleModalLabel"
                                      aria-hidden="true">
@@ -50,7 +50,7 @@
                                             </div>
                                             <div class="modal-footer" data-bs-dismiss="modal">
                                                 <a href="{% url "category:list" %}" class="btn btn-secondary">Continue Shopping</a>
-                                                <a href="{% url "product:cart_detail" %}" class="btn btn-primary">To Cart</a>
+                                                <a href="{% url "product:cart_detail" %}" class="btn btn-success">To Cart</a>
                                             </div>
                                         </div>
                                     </div>
