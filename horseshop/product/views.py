@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.forms import formset_factory
 from product.models import Product, ProductInCart
@@ -45,7 +46,7 @@ def cart_detail(request):
     context = {}
     total_count = 0
     subtotal_cost=0
-    ship_cost=0.00
+    ship_cost=0
     products_in_cart = ProductInCart.objects.all()
     for product in products_in_cart:
         total_count += product.total_count
@@ -54,7 +55,7 @@ def cart_detail(request):
     context = {'products_in_cart': products_in_cart,
                'total_count': total_count,
                'subtotal_cost': subtotal_cost,
-               'ship_cost': shipcost,
+               'ship_cost': ship_cost,
                'total_cost': total_cost
                }
     return render(request, 'product/cart_detail.html', context)
@@ -65,7 +66,8 @@ def cart_add_item(request, pk):
     quantity+=1
     product.total_count=quantity
     product.save()
-    return cart_detail(request)
+    cart_detail(request)
+    return HttpResponseRedirect('/product/cart/detail/')
 
 def cart_reduce_item(request, pk):
     product=get_object_or_404(ProductInCart,pk=pk)
@@ -76,10 +78,12 @@ def cart_reduce_item(request, pk):
         return cart_detail(request)
     product.total_count=quantity
     product.save()
-    return cart_detail(request)
+    cart_detail(request)
+    return HttpResponseRedirect('/product/cart/detail/')
 
 
 def cart_delete_item(request, pk):
     product=get_object_or_404(ProductInCart,pk=pk)
     product.delete()
-    return cart_detail(request)
+    cart_detail(request)
+    return HttpResponseRedirect('/product/cart/detail/')

@@ -3,53 +3,45 @@
 {% block title %} Cart
 {% endblock %}
 {% block main_content %}
-<h5>Your Cart ({{total_count}}
-    {%if total_count>1%} items
-    {%else%} item
-    )
-</h5>
 {% if products_in_cart %}
 <div class="container mt-3 pt-5">
     <div class="row">
         <div class="col-sm-8 p-3">
-            <h5>Your Cart ({{total_count}}
-                {%if total_count>1%} Items
-                {%else%} Item
-                )
+            <h5>
+                Your Cart ({{total_count}})
             </h5>
             <table class="table table-bordered">
                 <thead class="table-success">
                 <tr>
                     <th scope="row">Item Name</th>
-                    <th scope="row" class="text-center">Quantity</th>
-                    <th scope="row" class="text-center">Subtotal</th>
-                    <th scope="row" class="text-center">Remove</th>
+                    <th scope="row" class="text-center align-middle"">Quantity</th>
+                    <th scope="row" class="text-center align-middle"">Subtotal</th>
+                    <th scope="row" class="text-center align-middle"">Remove</th>
                 </thead>
                 </tr>
                 <tbody>
                 {% for object in products_in_cart %}
                 <tr>
-                    <td>
+                    <td class="align-middle">
                         {% if object.product.image %}
                         <a href="#"><img src="{{ object.product.image.url }}"></a>
                         {% else %}
-                        {# <a href="#"><img src="/static/img/product/no_product_image.png" class="img-thumbnail"></a>#}
+
                         {% endif %}
                         <a href="{% url 'product:detail' object.product.pk %}">{{ object.product.name }}</a>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center align-middle">
                         <a href="{% url 'product:cart_reduce_item' object.pk %}">
-                            <button id="minus">-</button>
-                        </a>
+                            <button id="minus">−</button></a>
                         {{ object.total_count }}
                         <a href="{% url 'product:cart_add_item' object.pk %}">
                             <button id="plus">+</button>
                         </a>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center align-middle"">
                         {{ object.total_price }}
                     </td>
-                    <td class="text-center">
+                    <td class="text-center align-middle"">
                         <a href="{% url 'product:cart_delete_item' object.pk %}">
                             <button id="plus">x</button>
                         </a>
@@ -60,32 +52,34 @@
             </table>
         </div>
         <div class="col-sm-4 p-3">
-            <h5>Order Summary )
+            <h5>Order Summary
             </h5>
-            <table class="table">
+            <table class="table table-bordered">
 
                 <tbody>
                 <tr>
                     <h6>
-                        <td>Subtotal:</td>
-                        <td>{{ subtotal_cost }}</td>
+                        <td class="align-middle">Subtotal:</td>
+                        <td class="align-middle">{{ subtotal_cost }}</td>
                     </h6>
                 </tr>
                 <tr>
                     <h6>
-                        <td>Shipping Cost:</td>
-                        <td>{{ ship_cost }}</td>
+                        <td class="align-middle">Shipping Cost:</td>
+                        <td class="align-middle">0.00</td>
                     </h6>
                 </tr>
                 <tr>
                     <h5>
-                        <td>Total Cost:</td>
-                        <td>{{ total_cost }}</td>
+                        <td class="align-middle">Total Cost:</td>
+                        <td class="align-middle">{{ total_cost }}</td>
                     </h5>
                 </tr>
                 </tbody>
             </table>
-            <h5><a href="{% url 'order:create' %}">Proceed To Checkout</a></h5>
+            <h5><a href="{% url 'order:create' %}">
+                            <button class="btn btn-success">Proceed To Checkout</button>
+                </a></h5>
         </div>
     </div>
 </div>
