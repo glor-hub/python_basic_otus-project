@@ -32,13 +32,13 @@
                                 {% ifequal object.order order %}
                                     <tr>
                                         <td class="text-center align-middle">{% if object.product.image %}
-                                            <a href="#"><img src="{{ object.product.image.url }}"></a>
+                                            <a href="#"><img src="{{ object.product.image.url }}" class="float-start" alt="Item_Image" width="204" height="136"></a>
                                         {% else %}
-                                            {#                        <a href="#"><img src="/static/img/product/no_product_image.png"></a>#}
+                                                                    <a href="#"><img src="/static/img/product/no_product_image.png" class="float-start" alt="Item_Image" width="304" height="236"></a>
                                         {% endif %}
                                         </td>
-                                        <td class="text-center align-middle"><a
-                                                href="{% url 'product:detail' object.product.pk %}">{{ object.product.name }}</a>
+                                        <td class="text-center align-middle">
+                                            <div class="product-detail"> <h4><a href="{% url 'product:detail' object.product.pk %}">{{ object.product.name }}</a></h4></div>
                                         </td>
                                         <td class="text-center align-middle">{{ object.total_count }}</td>
                                         <td class="text-center align-middle">{{ object.total_price }}</td>

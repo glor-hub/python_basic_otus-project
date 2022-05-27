@@ -13,6 +13,7 @@
                     <table class="table table-bordered">
                         <thead class="table-success">
                         <tr>
+                             <th></th>
                             <th scope="row">Item Name</th>
                             <th scope="row" class="text-center align-middle"
                             ">Quantity</th>
@@ -27,27 +28,31 @@
                             <tr>
                                 <td class="align-middle">
                                     {% if object.product.image %}
-                                        <a href="#"><img src="{{ object.product.image.url }}"></a>
+                                        <a href="#"><img src="{{ object.product.image.url }}" class="float-start"
+                                                         alt="Item_Image" width="204" height="136"></a>
                                     {% else %}
-
+                                        <a href="#"><img src="/static/img/product/no_product_image.png"
+                                                         class="float-start" alt="Item_Image" width="204" height="136"></a>
                                     {% endif %}
-                                    <a href="{% url 'product:detail' object.product.pk %}">{{ object.product.name }}</a>
+                                </td>
+                                <td class="product-detail text-center align-middle">
+                                    <h4><a href="{% url 'product:detail' object.product.pk %}">{{ object.product.name }}</a>
+                                    </h4>
                                 </td>
                                 <td class="text-center align-middle">
                                     <a href="{% url 'product:cart_reduce_item' object.pk %}">
                                         <button id="minus">−</button></a>
                                     {{ object.total_count }}
                                     <a href="{% url 'product:cart_add_item' object.pk %}">
-                                        <button id="plus">+</button>
+                                        <button id="plus">+</button></a>
+                                </td>
+                                <td class="text-center align-middle">
+                                    {{ object.total_price }}
+                                </td>
+                                <td class="text-center align-middle">
+                                    <a href="{% url 'product:cart_delete_item' object.pk %}">
+                                        <button id="plus">x</button>
                                     </a>
-                                </td>
-                                <td class="text-center align-middle">
-                                {{ object.total_price }}
-                                </td>
-                                <td class="text-center align-middle">
-                                <a href="{% url 'product:cart_delete_item' object.pk %}">
-                                    <button id="plus">x</button>
-                                </a>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -58,7 +63,6 @@
                     <h5>Order Summary
                     </h5>
                     <table class="table table-bordered">
-
                         <tbody>
                         <tr>
                             <h6>
@@ -89,5 +93,4 @@
     {% else %}
         <br> <h5>Your Cart Is Empty</h5>
     {% endif %}
-
 {% endblock %}
