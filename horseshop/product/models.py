@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from category.models import Subcategory
 from order.models import Order
 
+
 # Create your models here.
 class Manufacturer(models.Model):
     name = models.CharField(max_length=64)
@@ -42,7 +43,12 @@ class Manufacturer(models.Model):
 #         (MALE, 'Male'),
 #         (FEMALE, 'Female')
 #     ]
-#     SIZES = [(38, '38'),
+#     SIZES = [
+#     (38, '38'),
+# #              (40, '40'),
+# #              (42, '42'),
+# #              (44, '44'),
+# (38, '38'),
 #              (40, '40'),
 #              (42, '42'),
 #              (44, '44'),
@@ -62,18 +68,61 @@ class Manufacturer(models.Model):
 
 
 class Product(models.Model):
+    BLACK = 'BK'
+    WHITE = 'WT'
+    BLUE = 'BL'
+    BROWN = 'BR'
+    RED = 'RD'
+    GREEN = 'GR'
+
+    COLORS = [
+        (BLACK, 'Black'),
+        (WHITE, 'White'),
+        (BLUE, 'Blue'),
+        (BROWN, 'Brown'),
+        (RED, 'Red'),
+        (GREEN, 'Green')
+    ]
+    SIZES = [
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10'),
+        (11, '11'),
+        (37, '37'),
+        (38, '38'),
+        (39, '39'),
+        (40, '40'),
+        (41, '41'),
+        (42, '42'),
+        (43, '43'),
+        (44, '44'),
+        (46, '46'),
+        (57, '57'),
+        (58, '58'),
+        (59, '59'),
+        (60, '60'),
+        (120, '120'),
+        (130, '130'),
+        (140, '140'),
+        (150, '150'),
+        (160, '160'),
+    ]
     name = models.CharField(max_length=64)
-    image=models.ImageField(upload_to='product/', null=True)
+    image = models.ImageField(upload_to='product/', null=True)
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, null=True)
     curr_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     curr_count = models.PositiveIntegerField(default=1)
     is_active = models.BooleanField(default=True)
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, null=True)
+    color = models.CharField(max_length=2, choices=COLORS, default='BK')
+    size = models.PositiveIntegerField(choices=SIZES, default=38)
     # property = models.ForeignKey(ProductProperty, on_delete=models.CASCADE, null=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
         return f"{self.name}"
+
 
 class ProductInOrder(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)
@@ -93,6 +142,7 @@ class ProductInOrder(models.Model):
     def __str__(self):
         return f"product {self.product.name} in order {self.order.pk}"
 
+
 def product_in_order_post_save(sender, instance, created, **kwargs):
     order = instance.order
     all_products_in_order = ProductInOrder.objects.filter(order=order, is_active=True)
@@ -111,6 +161,7 @@ def product_in_order_post_save(sender, instance, created, **kwargs):
 
 
 post_save.connect(product_in_order_post_save, sender=ProductInOrder)
+
 
 class ProductInCart(models.Model):
     # BLACK = 'BK'
