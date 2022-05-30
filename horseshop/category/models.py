@@ -10,7 +10,6 @@ class Category(models.Model):
     def __str__(self):
         return f"{self.name}"
 
-
 class Subcategory(models.Model):
     name = models.CharField(max_length=32, unique=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)

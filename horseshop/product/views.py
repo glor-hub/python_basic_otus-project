@@ -81,7 +81,6 @@ def cart_reduce_item(request, pk):
     cart_detail(request)
     return HttpResponseRedirect('/product/cart/detail/')
 
-
 def cart_delete_item(request, pk):
     product=get_object_or_404(ProductInCart,pk=pk)
     product.delete()

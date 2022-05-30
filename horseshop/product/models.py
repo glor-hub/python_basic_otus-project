@@ -117,7 +117,6 @@ class Product(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, null=True)
     color = models.CharField(max_length=2, choices=COLORS, default='BK')
     size = models.PositiveIntegerField(choices=SIZES, default=38)
-    # property = models.ForeignKey(ProductProperty, on_delete=models.CASCADE, null=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
